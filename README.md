@@ -1,5 +1,9 @@
-<div style="text-align:center">
+<table align="center">
+  <tr>
+    <td align="center">
 
 # Simple notebook application
 
-</div>
+</td>
+  </tr>
+</table>
