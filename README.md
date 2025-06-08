@@ -1,5 +1,5 @@
-<center>
+<div style="text-align:center">
 
 # Simple notebook application
 
-</center>
+</div>
