@@ -1,1 +1,1 @@
-#Simple daily notebook application for my daily task schedule.
+# Simple daily notebook application for my daily task schedule.
