@@ -1,17 +1,32 @@
-export const getAllNotes = (req, res) => {
-  res
-    .status(200)
-    .send(`<h1 style="text-align:center">Hello there! how are you?</h1>`);
+import Note from "../models/Note.js";
+
+export const getAllNotes = async (req, res) => {
+  console.log(req.body);
+  try {
+    const notes = await Note.find();
+    res.status(200).json(notes);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
-export const createNote = (req, res) => {
-  res.status(201).json({ message: "Post created successfully" });
+export const createNote = async (req, res) => {
+  try {
+    const { title, content } = req.body;
+    const note = new Note({ title: title, content: content });
+    const savedNote = await note.save();
+    res.status(201).json(savedNote);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
-export const updateNote = (req, res) => {
+export const updateNote = async (req, res) => {
   res.status(200).json({ message: "Post updated successfully" });
 };
 
-export const deleteNote = (req, res) => {
+export const deleteNote = async (req, res) => {
   res.status(200).json({ message: "Post deleted successfully" });
 };
