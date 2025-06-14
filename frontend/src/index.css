@@ -1,0 +1,109 @@
+@import "tailwindcss";
+body {
+  font-family: "Poppins", sans-serif;
+  width: 100dvw;
+  overflow-x: hidden;
+}
+
+@layer base {
+  @font-face {
+    font-family: "Circular";
+    src: url("/fonts/circularweb-book.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "General";
+    src: url("/fonts/general.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Robert";
+    src: url("/fonts/robert-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Robert";
+    src: url("/fonts/robert-medium.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Zentry";
+    src: url("/fonts/zentry-regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "styleScript";
+    src: url("/fonts/StyleScript-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-Light.ttf");
+    font-weight: 300;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-Regular.ttf");
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-Medium.ttf");
+    font-weight: 500;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-SemiBold.ttf");
+    font-weight: 600;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-Bold.ttf");
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "Poppins";
+    src: url("/fonts/Poppins-ExtraBold.ttf");
+    font-weight: 800;
+    font-display: swap;
+  }
+}
+
+@theme {
+  --font-styleScript: styleScript, "sans-serif";
+  --font-zentry: Zentry, "sans-serif";
+  --font-robert: Robert, "sans-serif";
+  --font-general: General, "sans-serif";
+  --font-circular: Circular, "sans-serif";
+  --color-kblue-50: #dfdff0;
+  --color-kblue-75: #dfdff2;
+  --color-kblue-100: #f0f2fa;
+  --color-kblue-200: #010101;
+  --color-kblue-300: #4fb7dd;
+  --color-kviolet-300: #5724ff;
+  --color-kyellow-100: #8e983f;
+  --color-kyellow-300: #edff66;
+  --color-kyellow-100: #8e983f;
+  --color-kyellow-300: #edff66;
+}
+
+@utility btn {
+  @apply cursor-pointer px-4 py-2 rounded;
+}
+@utility btn-success {
+  @apply bg-green-700 text-white;
+}
+@utility btn-add {
+  @apply bg-green-600 rounded-full px-6 py-3 text-white font-medium;
+}
