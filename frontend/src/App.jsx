@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router";
 import Home from "./pages/Home";
 import CreateNote from "./pages/CreateNote";
@@ -10,11 +10,11 @@ const App = () => {
   const showToast = () => {
     toast.success("Here is your toast");
   };
+  useEffect(() => {
+    setTimeout(() => showToast(), 3000);
+  }, []);
   return (
     <>
-      <button onClick={showToast} className="btn btn-success flex gap-2">
-        <span>{<Camera />}</span> Take Photo
-      </button>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/create" element={<CreateNote />} />
