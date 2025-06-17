@@ -7,12 +7,6 @@ import toast from "react-hot-toast";
 import { Camera } from "lucide-react";
 
 const App = () => {
-  const showToast = () => {
-    toast.success("Here is your toast");
-  };
-  useEffect(() => {
-    setTimeout(() => showToast(), 3000);
-  }, []);
   return (
     <>
       <Routes>
