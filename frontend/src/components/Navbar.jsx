@@ -7,7 +7,9 @@ const Navbar = () => {
     <header className="bg-gray-100 border-b border-gray-200 py-5">
       <div className="mx-auto max-w-7xl p-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-2">
-          <h1 className="logo-style">Note App</h1>
+          <h1 className="logo-style">
+            <Link to="/">Note App</Link>
+          </h1>
           <div>
             <Link to="/create" className="flex btn-add">
               <PlusIcon size={20} strokeWidth={3} />

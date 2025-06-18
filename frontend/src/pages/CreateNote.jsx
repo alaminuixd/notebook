@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axiosApi from "../lib/axios";
 
 const CreateNote = () => {
   const [newNote, setNewNote] = useState({
@@ -10,6 +10,8 @@ const CreateNote = () => {
     content: "",
   });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
   // handler functions
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -20,7 +22,7 @@ const CreateNote = () => {
       };
     });
   };
-  const navigate = useNavigate();
+
   const handleInputSubmit = async (e) => {
     e.preventDefault();
     if (!newNote.title.trim() || !newNote.content.trim()) {
@@ -29,21 +31,26 @@ const CreateNote = () => {
     }
     setLoading(true);
     try {
-      await axios.post("http://localhost:3001/api/notes", {
+      await axiosApi.post("/notes", {
         title: newNote.title,
         content: newNote.content,
       });
-      setNewNote(() => {
-        return {
-          title: "",
-          content: "",
-        };
-      });
+      setNewNote(() => ({
+        title: "",
+        content: "",
+      }));
       toast.success("Note created successfully.");
       navigate("/");
     } catch (error) {
-      console.log(`Error craeting note ${error}`);
-      toast.error("Failed to create note");
+      console.log(`Error craeting note ${error.response.status}`);
+      if (error.response.status === 429) {
+        toast.error("Slow down! You are creating notes too fast", {
+          duration: 4000,
+          icon: "💀",
+        });
+      } else {
+        toast.error("Failed to create note");
+      }
     } finally {
       setLoading(false);
     }

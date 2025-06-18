@@ -13,7 +13,7 @@ const redis = new Redis({
 // Create a rate limiter: 10 requests per minute per identifier
 const ratelimit = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(2, "5 s"), // this limit is per user.
+  limiter: Ratelimit.slidingWindow(60, "60 s"), // this limit is per user.
   prefix: "@upstash/ratelimit",
   analytics: true,
 });
