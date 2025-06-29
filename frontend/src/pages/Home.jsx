@@ -5,7 +5,6 @@ import axiosApi from "../lib/axios";
 import toast from "react-hot-toast";
 import NoteCard from "../components/NoteCard";
 import NoteNotFound from "../components/NoteNotFound";
-import Confirm from "../components/Confirm";
 
 const Home = () => {
   const [rateLimit, setRateLimit] = useState(false);
