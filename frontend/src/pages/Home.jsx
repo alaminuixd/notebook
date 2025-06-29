@@ -28,6 +28,7 @@ const Home = () => {
           toast.error("Failed to load notes!");
         }
       } finally {
+        console.log(notes);
         setLoading(false);
       }
     };
