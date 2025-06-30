@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from "react-router";
 import axiosApi from "../lib/axios";
 import toast from "react-hot-toast";
 import { ArrowLeftIcon, Loader, Trash2Icon } from "lucide-react";
+import Confirm from "../components/Confirm";
 
 const DetailsNote = () => {
-  const [notes, setNotes] = useState(null);
+  const [note, setNote] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,7 +20,7 @@ const DetailsNote = () => {
       try {
         const res = await axiosApi.get(`/notes/${id}`);
         console.log(res);
-        setNotes(res.data);
+        setNote(res.data);
       } catch (error) {
         console.log("Error fetching data", error);
         toast.error("Failed to fetch the note");
@@ -26,9 +28,24 @@ const DetailsNote = () => {
         setLoading(false);
       }
     };
+    fetchNotes();
   }, [id]);
   // handler functions
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    async () => {
+      try {
+        await axiosApi.delete(`/note/${note._id}`);
+        /* setNote((prev) => prev.filter((n) => n._id !== note._id)); */
+        toast.success("Note deleted successfully");
+        navigate("/");
+      } catch (error) {
+        console.log("Error in handleDelete", error);
+        toast.error("Failed to delete note");
+      } finally {
+        setShowConfirm(false);
+      }
+    };
+  };
 
   if (loading) {
     return (
@@ -38,19 +55,45 @@ const DetailsNote = () => {
     );
   }
   return (
-    <div className="min-h-screen bg-base-200">
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex items-center justify-between mb-6">
-          <Link to="/" className="btn btn-ghost">
-            <ArrowLeftIcon className="h5 w-5" />
-          </Link>
-          <button onClick={handleDelete}>
-            <Trash2Icon className="w-5 h-5" />
-            Delete Note
-          </button>
+    <>
+      <div className="min-h-screen bg-base-200">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-between mb-6">
+            <Link
+              to="/"
+              className="btn btn-ghost flex gap-2 hover:gap-4 transition-all"
+            >
+              <ArrowLeftIcon className="h5 w-5" />
+              Back Home
+            </Link>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setShowConfirm(true);
+              }}
+              className="btn flex gap-2 bg-red-600 text-white rounded-full px-5 py-3 font-medium hover:bg-red-700 transition-all"
+            >
+              <Trash2Icon className="w-5 h-5" />
+              Delete Note
+            </button>
+          </div>
         </div>
+        {note && (
+          <div className="text-center">
+            <h2 className="text-3xl pb-3">{note.title}</h2>
+            <p>{note.content}</p>
+          </div>
+        )}
       </div>
-    </div>
+      {showConfirm && (
+        <Confirm
+          warnTitle="Are you sure?"
+          warnContent="This will delete the entire note."
+          onDelete={handleDelete}
+          onCancel={() => setShowConfirm(false)}
+        />
+      )}
+    </>
   );
 };
 

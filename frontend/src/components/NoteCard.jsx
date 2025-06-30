@@ -27,15 +27,19 @@ const NoteCard = ({ note, setNotes }) => {
       <Link
         to={`/note/${note._id}`}
         key={note._id}
-        className="border transition-all border-gray-200 shadow-[0_0_2px_rgba(0,0,0,0.15)] rounded-[0.6rem] p-6 pb-5 hover:bg-[#f7f7f7]"
+        className="border transition-all border-gray-200 shadow-[0_0_2px_rgba(0,0,0,0.15)] rounded-[0.6rem] p-6 pb-5 hover:bg-[#f7f7f7] flex flex-col justify-between"
       >
-        <h3 className="text-2xl font-bold text-gray-500 mb-2">{note.title}</h3>
-        <p className="text-gray-600">{note.content}</p>
+        <div>
+          <h3 className="text-2xl font-bold text-gray-500 mb-2">
+            {note.title}
+          </h3>
+          <p className="text-gray-600">{note.content}</p>
+        </div>
         <div className="flex mt-5 justify-between items-center">
           <div className="text-sm text-green-8">
             {formateDate(note.updatedAt)}
           </div>
-          <div className="flex gap-4 text-gray-500">
+          <div className="flex gap-4 text-gray-500 self-end">
             <SquarePen size={20} className="hover:text-yellow-500" />
             <Trash2
               size={20}
