@@ -4,9 +4,14 @@ import axiosApi from "../lib/axios";
 import toast from "react-hot-toast";
 import { ArrowLeftIcon, Loader, Trash2Icon } from "lucide-react";
 import Confirm from "../components/Confirm";
+import FormComp from "../components/FormComp";
 
 const DetailsNote = () => {
   const [note, setNote] = useState(null);
+  const [updateNote, setUpdateNote] = useState({
+    title: "",
+    content: "",
+  });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
@@ -21,6 +26,7 @@ const DetailsNote = () => {
         const res = await axiosApi.get(`/notes/${id}`);
         console.log(res);
         setNote(res.data);
+        setUpdateNote({ title: res.data.title, content: res.data.content });
       } catch (error) {
         console.log("Error fetching data", error);
         toast.error("Failed to fetch the note");
@@ -31,20 +37,40 @@ const DetailsNote = () => {
     fetchNotes();
   }, [id]);
   // handler functions
-  const handleDelete = () => {
-    async () => {
-      try {
-        await axiosApi.delete(`/note/${note._id}`);
-        /* setNote((prev) => prev.filter((n) => n._id !== note._id)); */
-        toast.success("Note deleted successfully");
-        navigate("/");
-      } catch (error) {
-        console.log("Error in handleDelete", error);
-        toast.error("Failed to delete note");
-      } finally {
-        setShowConfirm(false);
-      }
-    };
+  const handleDelete = async () => {
+    try {
+      await axiosApi.delete(`/notes/${note._id}`);
+      toast.success("Note deleted successfully");
+      navigate("/");
+    } catch (error) {
+      console.log("Error in handleDelete", error);
+      toast.error("Failed to delete note");
+    } finally {
+      setShowConfirm(false);
+    }
+  };
+  // handle input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUpdateNote((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const updateNoteSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    try {
+      await axiosApi.put(`/notes/${note._id}`, updateNote);
+      toast.success("Note updated successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Error updating note", error);
+      toast.error("Failed to update the note");
+    } finally {
+      setSaving(false);
+    }
   };
 
   if (loading) {
@@ -79,16 +105,26 @@ const DetailsNote = () => {
           </div>
         </div>
         {note && (
-          <div className="text-center">
-            <h2 className="text-3xl pb-3">{note.title}</h2>
-            <p>{note.content}</p>
+          <div>
+            <div className="text-center">
+              <h2 className="text-3xl pb-3">{note.title}</h2>
+              <p>{note.content}</p>
+            </div>
+            <FormComp
+              header={"Update the Note"}
+              className="w-2xl mx-auto"
+              value={updateNote}
+              onChange={handleInputChange}
+              onSubmit={updateNoteSubmit}
+              buttonText={saving ? "Saving..." : "Update Note"}
+            />
           </div>
         )}
       </div>
       {showConfirm && (
         <Confirm
-          warnTitle="Are you sure?"
-          warnContent="This will delete the entire note."
+          warnTitle="Delete Note?"
+          warnContent="Are you sure you want to delete this entire note?"
           onDelete={handleDelete}
           onCancel={() => setShowConfirm(false)}
         />

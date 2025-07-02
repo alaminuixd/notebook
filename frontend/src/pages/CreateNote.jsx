@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router";
 import { ArrowRight } from "lucide-react";
 import toast from "react-hot-toast";
 import axiosApi from "../lib/axios";
+import FormComp from "../components/FormComp";
 
 const CreateNote = () => {
   const [newNote, setNewNote] = useState({
@@ -65,29 +66,13 @@ const CreateNote = () => {
           <span className="inline-block font-medium">Go Home</span>
           <ArrowRight size={20} />
         </Link>
-        <form className="note-card" onSubmit={handleInputSubmit}>
-          <h1>Create a new note.</h1>
-          <label htmlFor="title">Title: </label>
-          <input
-            type="text"
-            name="title"
-            placeholder="Note title"
-            value={newNote.title}
-            onChange={handleInputChange}
-          />
-          <label htmlFor="content" className="mt-4 mb-2">
-            Content:{" "}
-          </label>
-          <textarea
-            name="content"
-            placeholder="Note content"
-            value={newNote.content}
-            onChange={handleInputChange}
-          ></textarea>
-          <button type="submit">
-            {loading ? "Loading..." : "Create Note"}
-          </button>
-        </form>
+        <FormComp
+          header={"Create a New Note"}
+          value={newNote}
+          onChange={handleInputChange}
+          onSubmit={handleInputSubmit}
+          buttonText={loading ? "Loading..." : "Create Note"}
+        />
       </div>
     </div>
   );
