@@ -60,7 +60,7 @@ const NoteDetails = () => {
       [name]: value.trim() === "", // true if empty
     }));
   };
-  const handleInputSubmit = async (e) => {
+  const handleInputSubmitSave = async (e) => {
     e.preventDefault();
     if (!note.title.trim()) {
       toast.error("Please add the title");
@@ -73,7 +73,15 @@ const NoteDetails = () => {
       return;
     }
     try {
-    } catch (error) {}
+      await api.put(`/notes/${id}`, note);
+      toast.success("Note updated successfully");
+      navigate("/");
+    } catch (error) {
+      console.error("Note update failed", error);
+      toast.error("Error updating note");
+    } finally {
+      setSaving(false);
+    }
   };
   if (loading) {
     return (
@@ -115,7 +123,7 @@ const NoteDetails = () => {
             header="Update Note"
             value={note}
             onChange={handleInputChange}
-            onSubmit={handleInputSubmit}
+            onSubmit={handleInputSubmitSave}
             buttonText={saving ? "Saving..." : "Update Note"}
             className={`w-3xl mx-auto`}
             error={error}

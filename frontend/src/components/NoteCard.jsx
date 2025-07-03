@@ -27,7 +27,7 @@ const NoteCard = ({ note, setNotes }) => {
       <Link
         to={`/note/${note._id}`}
         key={note._id}
-        className="border transition-all border-gray-200 shadow-[0_0_2px_rgba(0,0,0,0.15)] rounded-[0.6rem] p-6 pb-5 hover:bg-[#f7f7f7] flex flex-col justify-between"
+        className="border transition-all border-gray-200 shadow-[0_0_2px_rgba(0,0,0,0.15)] rounded-[0.6rem] p-6 pb-5 hover:bg-[#f7f7f7] flex flex-col justify-between border-t-3 border-t-green-8"
       >
         <div>
           <h3 className="text-2xl font-bold text-gray-500 mb-2">
