@@ -10,6 +10,10 @@ const CreateNote = () => {
     title: "",
     content: "",
   });
+  const [error, setError] = useState({
+    title: false,
+    content: false,
+  });
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -22,14 +26,25 @@ const CreateNote = () => {
         [name]: value,
       };
     });
+    setError((prev) => ({
+      ...prev,
+      [name]: value.trim() === "",
+    }));
   };
 
   const handleInputSubmit = async (e) => {
     e.preventDefault();
-    if (!newNote.title.trim() || !newNote.content.trim()) {
-      toast.error("Title and Content are required.");
+    if (!newNote.title.trim()) {
+      toast.error("Please provide a title");
+      setError((prev) => ({ ...prev, title: true }));
       return;
     }
+    if (!newNote.content.trim()) {
+      toast.error("Please provide the content");
+      setError((prev) => ({ ...prev, content: true }));
+      return;
+    }
+    setError((prev) => ({ ...prev, title: false, content: false }));
     setLoading(true);
     try {
       await axiosApi.post("/notes", {
@@ -72,6 +87,7 @@ const CreateNote = () => {
           onChange={handleInputChange}
           onSubmit={handleInputSubmit}
           buttonText={loading ? "Loading..." : "Create Note"}
+          error={error}
         />
       </div>
     </div>

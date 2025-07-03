@@ -33,7 +33,7 @@ const NoteCard = ({ note, setNotes }) => {
           <h3 className="text-2xl font-bold text-gray-500 mb-2">
             {note.title}
           </h3>
-          <p className="text-gray-600">{note.content}</p>
+          <p className="text-gray-600 two-line-truncate">{note.content}</p>
         </div>
         <div className="flex mt-5 justify-between items-center">
           <div className="text-sm text-green-8">

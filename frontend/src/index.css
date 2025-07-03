@@ -101,4 +101,10 @@ body {
   .note-card h1 {
     @apply text-3xl text-center mb-7 font-bold text-gray-600;
   }
+  .two-line-truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }

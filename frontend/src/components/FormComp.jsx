@@ -7,6 +7,7 @@ const FormComp = ({
   onSubmit,
   buttonText = "Submit",
   className = "",
+  error = null,
 }) => {
   return (
     <form className={`note-card ${className}`} onSubmit={onSubmit}>
@@ -14,7 +15,9 @@ const FormComp = ({
       <div className="flex justify-center items-center gap-3">
         <label htmlFor="title">Title: </label>
         <input
-          className="w-full"
+          className={`w-full border rounded p-2 ${
+            error?.title ? "border-red-500" : "border-gray-300"
+          }`}
           type="text"
           name="title"
           placeholder="Note title"
@@ -26,6 +29,9 @@ const FormComp = ({
         Content:{" "}
       </label>
       <textarea
+        className={`w-full border rounded p-2 mt-2 ${
+          error?.content ? "border-red-500 border-doub" : "border-gray-300"
+        }`}
         name="content"
         placeholder="Note content"
         value={value.content}
