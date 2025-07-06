@@ -4,7 +4,7 @@ import axios from "axios";
 const BASE_URL =
   import.meta.env.MODE === "production"
     ? "https://notebook-6mda.onrender.com/api"
-    : "/api";
+    : "http://localhost:3001/api";
 
 const axiosApi = axios.create({
   baseURL: BASE_URL,

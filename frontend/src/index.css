@@ -74,7 +74,7 @@ body {
 
 @layer components {
   .note-card {
-    @apply flex flex-col bg-[#efefef] p-15 rounded-2xl mt-10 shadow-[0_0_4px_rgba(0,0,0,0.25)];
+    @apply flex flex-col bg-[#efefef] p-5 md:p-15 rounded-2xl mt-10 shadow-[0_0_4px_rgba(0,0,0,0.25)];
   }
 
   .note-card label {

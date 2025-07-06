@@ -93,7 +93,7 @@ const NoteDetails = () => {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto mt-5 mb-5 px-4">
+      <div className="max-w-7xl mx-auto mt-5 mb-5 px-2 md:px-4">
         <div className="flex items-center justify-between mb-6">
           <Link
             to="/"
