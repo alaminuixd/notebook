@@ -112,7 +112,7 @@ const DetailsNote = () => {
             </div>
             <FormComp
               header={"Update the Note"}
-              className="w-2xl mx-auto"
+              className="w-full px-4 mx-auto"
               value={updateNote}
               onChange={handleInputChange}
               onSubmit={updateNoteSubmit}

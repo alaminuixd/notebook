@@ -73,7 +73,7 @@ const CreateNote = () => {
   };
   return (
     <div className="w-full h-dvh">
-      <div className="mt-20 w-2xl mx-auto">
+      <div className="mt-20 max-w-2xl w-full px-4 mx-auto">
         <Link
           to={"/"}
           className="border border-gray-300 py-3 px-5 rounded-full inline-flex items-center gap-1 hover:gap-4 transition-all text-gray-600 shadow-[0_1px_2px_rgba(0,0,0,0.15)]"

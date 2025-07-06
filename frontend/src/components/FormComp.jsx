@@ -10,10 +10,13 @@ const FormComp = ({
   error = null,
 }) => {
   return (
-    <form className={`note-card ${className}`} onSubmit={onSubmit}>
-      <h1 className="font-medium">{header}</h1>
-      <div className="flex justify-center items-center gap-3">
-        <label htmlFor="title">Title: </label>
+    <form className={`note-card ${className} space-y-4`} onSubmit={onSubmit}>
+      <h1 className="font-medium text-xl">{header}</h1>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="title" className="font-medium">
+          Title:
+        </label>
         <input
           className={`w-full border rounded p-2 ${
             error?.title ? "border-red-500" : "border-gray-300"
@@ -25,19 +28,28 @@ const FormComp = ({
           onChange={onChange}
         />
       </div>
-      <label htmlFor="content" className="mt-4 mb-2">
-        Content:{" "}
-      </label>
-      <textarea
-        className={`w-full border rounded p-2 mt-2 ${
-          error?.content ? "border-red-500 border-doub" : "border-gray-300"
-        }`}
-        name="content"
-        placeholder="Note content"
-        value={value.content}
-        onChange={onChange}
-      ></textarea>
-      <button type="submit">{buttonText}</button>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="content" className="font-medium">
+          Content:
+        </label>
+        <textarea
+          className={`w-full border rounded p-2 ${
+            error?.content ? "border-red-500" : "border-gray-300"
+          }`}
+          name="content"
+          placeholder="Note content"
+          value={value.content}
+          onChange={onChange}
+        ></textarea>
+      </div>
+
+      <button
+        type="submit"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+      >
+        {buttonText}
+      </button>
     </form>
   );
 };

@@ -93,7 +93,7 @@ const NoteDetails = () => {
 
   return (
     <>
-      <div className="w-7xl mx-auto mt-5">
+      <div className="max-w-7xl mx-auto mt-5 mb-5 px-4">
         <div className="flex items-center justify-between mb-6">
           <Link
             to="/"
@@ -118,14 +118,14 @@ const NoteDetails = () => {
             </div>
           )}
         </div>
-        <div className="w-6xl mx-auto mt-20">
+        <div className="max-w-6xl mx-auto mt-20">
           <FormComp
             header="Update Note"
             value={note}
             onChange={handleInputChange}
             onSubmit={handleInputSubmitSave}
             buttonText={saving ? "Saving..." : "Update Note"}
-            className={`w-3xl mx-auto`}
+            className={`mx-w-3xl mx-auto`}
             error={error}
           />
         </div>
